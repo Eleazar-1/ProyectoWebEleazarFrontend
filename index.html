@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triply — Planifica tu viaje</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">✈</div>
+        <span>triply</span>
+      </div>
+
+      <div class="profile-mini">
+        <div class="avatar avatar-pink">EL</div>
+        <div>
+          <strong>Eleazar</strong>
+          <small>Organizador</small>
+        </div>
+      </div>
+
+      <nav>
+        <p class="nav-label">MI VIAJE</p>
+        <button class="nav-item active" data-section="resumen">🏠 <span>Resumen</span></button>
+        <button class="nav-item" data-section="itinerario">📅 <span>Itinerario</span></button>
+        <button class="nav-item" data-section="gastos">💸 <span>Gastos</span></button>
+        <button class="nav-item" data-section="votaciones">🗳️ <span>Votaciones</span></button>
+
+        <p class="nav-label space-top">OTROS</p>
+        <button class="nav-item coming-soon">📍 <span>Mapa</span><em>Pronto</em></button>
+        <button class="nav-item coming-soon">🎫 <span>Reservas</span><em>Pronto</em></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <span>💡</span>
+          <strong>Consejo viajero</strong>
+          <p>Dejad un pequeño margen para gastos inesperados.</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">TU PRÓXIMA AVENTURA</span>
+          <h1>¡Nos vamos a Mallorca! 🌴</h1>
+        </div>
+        <button class="invite-btn" id="inviteBtn">＋ Invitar amigos</button>
+      </header>
+
+      <section id="resumen" class="page-section active-section">
+        <div class="hero-card">
+          <div class="hero-content">
+            <span class="pill">✈️ 4 DÍAS DE AVENTURA</span>
+            <h2>Mallorca</h2>
+            <p>12 — 16 octubre 2026 · 4 viajeros</p>
+            <div class="progress-wrap">
+              <div class="progress-info"><span>Preparación del viaje</span><strong>72%</strong></div>
+              <div class="progress"><div style="width:72%"></div></div>
+            </div>
+          </div>
+          <div class="sun">☀️</div>
+          <div class="hero-decoration">✦</div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon purple">📅</div>
+            <div><span>Próximo plan</span><strong>Playa de Muro</strong><small>Mañana · 10:30</small></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">💰</div>
+            <div><span>Gasto por persona</span><strong>185,50 €</strong><small>de 250 € previstos</small></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange">🗳️</div>
+            <div><span>Votaciones abiertas</span><strong>2 pendientes</strong><small>Tu voto cuenta</small></div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="panel itinerary-preview">
+            <div class="panel-heading">
+              <div><span class="section-kicker">PLAN DEL VIAJE</span><h3>Próximos días</h3></div>
+              <button class="text-btn" data-go="itinerario">Ver todo →</button>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="day-badge">12<br><small>OCT</small></div>
+                <div class="timeline-line"></div>
+                <div class="timeline-content"><span>16:00</span><strong>✈️ Llegada a Palma</strong><p>Recoger el coche y hacer check-in</p></div>
+              </div>
+              <div class="timeline-item">
+                <div class="day-badge">13<br><small>OCT</small></div>
+                <div class="timeline-line"></div>
+                <div class="timeline-content"><span>10:30</span><strong>🏖️ Playa de Muro</strong><p>Un día de playa y relax</p></div>
+              </div>
+              <div class="timeline-item">
+                <div class="day-badge">14<br><small>OCT</small></div>
+                <div class="timeline-line"></div>
+                <div class="timeline-content"><span>09:00</span><strong>🥾 Ruta por la Serra</strong><p>Excursión + picnic</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel people-panel">
+            <div class="panel-heading">
+              <div><span class="section-kicker">EL EQUIPO</span><h3>Los viajeros</h3></div>
+              <span class="people-count">4/6</span>
+            </div>
+            <div class="people">
+              <div class="person"><div class="avatar avatar-pink">EL</div><div><strong>Eleazar</strong><small>Organizador</small></div><span class="online"></span></div>
+              <div class="person"><div class="avatar avatar-blue">JR</div><div><strong>Jorge</strong><small>Viajero</small></div><span class="online"></span></div>
+              <div class="person"><div class="avatar avatar-yellow">AM</div><div><strong>Ana</strong><small>Viajera</small></div><span class="online"></span></div>
+              <div class="person"><div class="avatar avatar-purple">DS</div><div><strong>Dani</strong><small>Viajero</small></div><span></span></div>
+            </div>
+            <button class="full-btn" id="inviteBtn2">＋ Añadir viajero</button>
+          </div>
+        </div>
+
+        <div class="panel vote-highlight">
+          <div class="vote-emoji">🍽️</div>
+          <div class="vote-info"><span class="section-kicker">DECIDID ENTRE TODOS</span><h3>¿Dónde cenamos el viernes?</h3><p>La votación termina en 18 horas.</p></div>
+          <div class="vote-options"><div><span>🍕 La Trattoria</span><strong>3 votos</strong></div><div><span>🍣 Sushiko</span><strong>1 voto</strong></div></div>
+          <button class="primary-btn" data-go="votaciones">Votar</button>
+        </div>
+      </section>
+
+      <section id="itinerario" class="page-section">
+        <div class="section-header"><div><span class="eyebrow">ORGANIZACIÓN</span><h2>Itinerario 📅</h2><p>Todo lo que tenéis planeado, día por día.</p></div><button class="primary-btn" id="addActivity">＋ Añadir actividad</button></div>
+        <div class="day-tabs"><button class="day-tab active">12 OCT</button><button class="day-tab">13 OCT</button><button class="day-tab">14 OCT</button><button class="day-tab">15 OCT</button></div>
+        <div class="schedule">
+          <div class="schedule-card"><time>16:00</time><div class="schedule-icon">✈️</div><div><span class="tag purple-tag">TRANSPORTE</span><h3>Llegada a Palma</h3><p>Recoger el coche en el aeropuerto.</p></div><button class="dots">•••</button></div>
+          <div class="schedule-card"><time>18:30</time><div class="schedule-icon">🏨</div><div><span class="tag green-tag">ALOJAMIENTO</span><h3>Check-in en el apartamento</h3><p>Dejar las maletas y descansar.</p></div><button class="dots">•••</button></div>
+          <div class="schedule-card"><time>21:00</time><div class="schedule-icon">🍝</div><div><span class="tag orange-tag">COMIDA</span><h3>Cena en el centro</h3><p>Reserva pendiente de confirmar.</p></div><button class="dots">•••</button></div>
+        </div>
+        <div class="coming-box"><span>🗺️</span><div><strong>Mapas y rutas — próximamente</strong><p>Podrás ver todas las actividades directamente sobre un mapa.</p></div></div>
+      </section>
+
+      <section id="gastos" class="page-section">
+        <div class="section-header"><div><span class="eyebrow">DINERO</span><h2>Gastos 💸</h2><p>Controlad el presupuesto sin discusiones.</p></div><button class="primary-btn" id="addExpense">＋ Añadir gasto</button></div>
+        <div class="money-cards"><div class="money-card"><span>Presupuesto total</span><strong>1.000 €</strong><div class="money-bar"><i style="width:74%"></i></div><small>740 € gastados</small></div><div class="money-card"><span>Por persona</span><strong>185,50 €</strong><small>4 viajeros</small></div><div class="money-card"><span>Queda</span><strong>260 €</strong><small>26% del presupuesto</small></div></div>
+        <div class="panel expense-panel"><div class="panel-heading"><div><span class="section-kicker">MOVIMIENTOS</span><h3>Últimos gastos</h3></div></div>
+          <div class="expense-row"><span class="expense-icon">🏨</span><div><strong>Apartamento</strong><small>Eleazar · 12 oct</small></div><b>420,00 €</b></div>
+          <div class="expense-row"><span class="expense-icon">🚗</span><div><strong>Coche de alquiler</strong><small>Jorge · 12 oct</small></div><b>180,00 €</b></div>
+          <div class="expense-row"><span class="expense-icon">🍕</span><div><strong>Cena</strong><small>Ana · 13 oct</small></div><b>68,00 €</b></div>
+          <div class="expense-row"><span class="expense-icon">⛽</span><div><strong>Gasolina</strong><small>Dani · 14 oct</small></div><b>72,00 €</b></div>
+        </div>
+        <div class="settlement"><span>💸</span><div><strong>Reparto automático — próximamente</strong><p>El backend calculará quién tiene que pagar a quién para equilibrar los gastos.</p></div></div>
+      </section>
+
+      <section id="votaciones" class="page-section">
+        <div class="section-header"><div><span class="eyebrow">DECISIONES</span><h2>Votaciones 🗳️</h2><p>Porque ponerse de acuerdo también forma parte del viaje.</p></div><button class="primary-btn" id="newVote">＋ Nueva votación</button></div>
+        <div class="vote-grid">
+          <div class="vote-card"><span class="vote-status open">ABIERTA</span><h3>¿Dónde cenamos el viernes?</h3><p>Elige tu restaurante favorito.</p><div class="poll-option"><span>🍕 La Trattoria</span><b>3</b></div><div class="poll-option"><span>🍣 Sushiko</span><b>1</b></div><div class="poll-option"><span>🍔 Burger Lab</span><b>0</b></div><button class="secondary-btn vote-now">Votar ahora</button></div>
+          <div class="vote-card"><span class="vote-status open">ABIERTA</span><h3>¿A qué hora salimos?</h3><p>Para la excursión de Serra.</p><div class="poll-option"><span>🌅 08:00</span><b>1</b></div><div class="poll-option"><span>☀️ 09:00</span><b>3</b></div><button class="secondary-btn vote-now">Votar ahora</button></div>
+          <div class="vote-card locked"><span class="vote-status closed">CERRADA</span><h3>¿Hotel o apartamento?</h3><p>Decisión tomada el 1 de septiembre.</p><div class="winner">🏆 Apartamento <strong>4 votos</strong></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <div class="modal" id="modal"><div class="modal-box"><button class="modal-close" id="closeModal">×</button><div class="modal-icon">🚀</div><h2>Función de demo</h2><p id="modalText">Esta acción está preparada para conectarse con el backend.</p><button class="primary-btn" id="modalOk">¡Entendido!</button></div></div>
+  <script src="script.js"></script>
+</body>
+</html>
