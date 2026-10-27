@@ -9,12 +9,15 @@ El proyecto contará con un frontend, encargado de la interfaz y la interacción
 Algunas funciones más avanzadas, como mapas, reservas y el cálculo automático de quién debe dinero a quién, se plantean como funcionalidades futuras.
 
 ## Archivos
+- login.html — inicio de sesión y creación de una sesión demo
 - index.html — estructura de la web
 - styles.css — diseño responsive
 - script.js — navegación e interacciones de la demo
 
 ## Cómo ejecutarla
-Abre `index.html` en el navegador.
+Abre `login.html` en el navegador. Usa cualquier correo válido y una contraseña de al menos cuatro caracteres.
+
+La sesión demo guarda el usuario y los viajes únicamente en `sessionStorage`, es decir, en la memoria de la pestaña y sin persistencia permanente. Los viajes se crean desde **＋ Nuevo viaje** y desde el selector **Mis viajes** se puede cambiar entre ellos. Esta estructura podrá sustituirse por las respuestas del backend sin cambiar la navegación.
 
 ## Funciones simuladas
 - Dashboard del viaje

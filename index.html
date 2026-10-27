@@ -18,11 +18,17 @@
       </div>
 
       <div class="profile-mini">
-        <div class="avatar avatar-pink">EL</div>
+        <div class="avatar avatar-pink" id="userAvatar">EL</div>
         <div>
-          <strong>Eleazar</strong>
-          <small>Organizador</small>
+          <strong id="userName">Eleazar</strong>
+          <small id="userRole">Organizador</small>
         </div>
+      </div>
+
+      <div class="trip-switcher">
+        <label for="tripSelector">MIS VIAJES</label>
+        <select id="tripSelector" aria-label="Seleccionar viaje"></select>
+        <button class="new-trip-btn" id="newTripBtn">＋ Nuevo viaje</button>
       </div>
 
       <nav>
@@ -43,6 +49,7 @@
           <strong>Consejo viajero</strong>
           <p>Dejad un pequeño margen para gastos inesperados.</p>
         </div>
+        <button class="logout-btn" id="logoutBtn">↪ <span>Cerrar sesión</span></button>
       </div>
     </aside>
 
@@ -50,17 +57,25 @@
       <header class="topbar">
         <div>
           <span class="eyebrow">TU PRÓXIMA AVENTURA</span>
-          <h1>¡Nos vamos a Mallorca! 🌴</h1>
+          <h1 id="tripHeading">Tu próximo viaje empieza aquí</h1>
         </div>
         <button class="invite-btn" id="inviteBtn">＋ Invitar amigos</button>
       </header>
 
       <section id="resumen" class="page-section active-section">
-        <div class="hero-card">
+        <div class="empty-trip-state" id="emptyTripState">
+          <div class="empty-orbit"><span>✦</span><strong>✈</strong><i></i></div>
+          <span class="section-kicker">TU ESPACIO DE VIAJES</span>
+          <h2>Tu próxima aventura<br>empieza aquí</h2>
+          <p>Aún no tienes viajes creados. Diseña el primero y empieza a organizarlo con tu grupo.</p>
+          <button class="primary-btn" id="emptyCreateTrip">＋ Crear mi primer viaje</button>
+        </div>
+
+        <div class="hero-card trip-content">
           <div class="hero-content">
             <span class="pill">✈️ 4 DÍAS DE AVENTURA</span>
-            <h2>Mallorca</h2>
-            <p>12 — 16 octubre 2026 · 4 viajeros</p>
+            <h2 id="tripName">Sin viaje seleccionado</h2>
+            <p id="tripDetails">Crea un viaje para empezar a organizarlo</p>
             <div class="progress-wrap">
               <div class="progress-info"><span>Preparación del viaje</span><strong>72%</strong></div>
               <div class="progress"><div style="width:72%"></div></div>
@@ -68,9 +83,10 @@
           </div>
           <div class="sun">☀️</div>
           <div class="hero-decoration">✦</div>
+          <div class="hero-scene" aria-hidden="true"><div class="scene-ring ring-one"></div><div class="scene-ring ring-two"></div><div class="scene-card"><span>✈</span><b>TRIPLY</b><small>YOUR NEXT ESCAPE</small></div><div class="scene-dot dot-one"></div><div class="scene-dot dot-two"></div></div>
         </div>
 
-        <div class="stats-grid">
+        <div class="stats-grid trip-content">
           <div class="stat-card">
             <div class="stat-icon purple">📅</div>
             <div><span>Próximo plan</span><strong>Playa de Muro</strong><small>Mañana · 10:30</small></div>
@@ -85,7 +101,7 @@
           </div>
         </div>
 
-        <div class="content-grid">
+        <div class="content-grid trip-content">
           <div class="panel itinerary-preview">
             <div class="panel-heading">
               <div><span class="section-kicker">PLAN DEL VIAJE</span><h3>Próximos días</h3></div>
@@ -125,7 +141,7 @@
           </div>
         </div>
 
-        <div class="panel vote-highlight">
+        <div class="panel vote-highlight trip-content">
           <div class="vote-emoji">🍽️</div>
           <div class="vote-info"><span class="section-kicker">DECIDID ENTRE TODOS</span><h3>¿Dónde cenamos el viernes?</h3><p>La votación termina en 18 horas.</p></div>
           <div class="vote-options"><div><span>🍕 La Trattoria</span><strong>3 votos</strong></div><div><span>🍣 Sushiko</span><strong>1 voto</strong></div></div>
@@ -168,7 +184,7 @@
   </div>
 
   <div class="toast" id="toast"></div>
-  <div class="modal" id="modal"><div class="modal-box"><button class="modal-close" id="closeModal">×</button><div class="modal-icon">🚀</div><h2>Función de demo</h2><p id="modalText">Esta acción está preparada para conectarse con el backend.</p><button class="primary-btn" id="modalOk">¡Entendido!</button></div></div>
+  <div class="modal" id="modal"><div class="modal-box"><button class="modal-close" id="closeModal">×</button><div class="modal-icon" id="modalIcon">🚀</div><h2 id="modalTitle">Función de demo</h2><p id="modalText">Esta acción está preparada para conectarse con el backend.</p><form class="trip-form" id="tripForm"><label for="tripInputName">Nombre del viaje</label><input id="tripInputName" required maxlength="30" placeholder="Ej. Escapada a Lisboa"><label for="tripInputDates">Fechas</label><input id="tripInputDates" required maxlength="40" placeholder="Ej. 3 — 7 mayo 2027"><label for="tripInputTravelers">Número de viajeros</label><input id="tripInputTravelers" type="number" min="1" max="30" value="2" required><button class="primary-btn" type="submit">Crear viaje</button></form><button class="primary-btn" id="modalOk">¡Entendido!</button></div></div>
   <script src="script.js"></script>
 </body>
 </html>
