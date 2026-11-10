@@ -14,177 +14,316 @@
     <aside class="sidebar">
       <div class="brand">
         <div class="brand-icon">✈</div>
-        <span>triply</span>
+        <span class="brand-name">triply</span>
       </div>
 
-      <div class="profile-mini">
-        <div class="avatar avatar-pink" id="userAvatar">EL</div>
-        <div>
-          <strong id="userName">Eleazar</strong>
-          <small id="userRole">Organizador</small>
+      <div class="profile-area">
+        <button class="profile-mini" id="profileToggle" aria-haspopup="true" aria-expanded="false">
+          <div class="avatar avatar-pink" id="userAvatar">EL</div>
+          <div class="profile-info">
+            <strong id="userName">Eleazar</strong>
+            <small id="userRole" data-i18n="role">Organizador</small>
+          </div>
+          <i class="profile-caret">▾</i>
+        </button>
+        <div class="profile-submenu" id="profileSubmenu">
+          <button class="submenu-item" id="openEditProfile">
+            <i>✏️</i> <span data-i18n="editProfile">Editar perfil</span>
+          </button>
         </div>
       </div>
 
       <div class="trip-switcher">
-        <label for="tripSelector">MIS VIAJES</label>
+        <label for="tripSelector" data-i18n="myTrips">MIS VIAJES</label>
         <select id="tripSelector" aria-label="Seleccionar viaje"></select>
-        <button class="new-trip-btn" id="newTripBtn">＋ Nuevo viaje</button>
+        <button class="new-trip-btn" id="newTripBtn">＋ <span data-i18n="newTrip">Nuevo viaje</span></button>
       </div>
 
       <nav>
-        <p class="nav-label">MI VIAJE</p>
-        <button class="nav-item active" data-section="resumen">🏠 <span>Resumen</span></button>
-        <button class="nav-item" data-section="itinerario">📅 <span>Itinerario</span></button>
-        <button class="nav-item" data-section="gastos">💸 <span>Gastos</span></button>
-        <button class="nav-item" data-section="votaciones">🗳️ <span>Votaciones</span></button>
+        <p class="nav-label" data-i18n="navMyTrip">MI VIAJE</p>
+        <button class="nav-item active" data-section="resumen"><i>🏠</i> <span data-i18n="navHome">Resumen</span></button>
+        <button class="nav-item" data-section="itinerario"><i>📅</i> <span data-i18n="navItin">Itinerario</span></button>
+        <button class="nav-item" data-section="gastos"><i>💸</i> <span data-i18n="navExp">Gastos</span></button>
+        <button class="nav-item" data-section="votaciones"><i>🗳️</i> <span data-i18n="navVotes">Votaciones</span></button>
+        <button class="nav-item" data-section="mapa"><i>📍</i> <span data-i18n="navMap">Mapa</span></button>
+        <button class="nav-item" data-section="reservas"><i>🎫</i> <span data-i18n="navBook">Reservas</span></button>
 
-        <p class="nav-label space-top">OTROS</p>
-        <button class="nav-item coming-soon">📍 <span>Mapa</span><em>Pronto</em></button>
-        <button class="nav-item coming-soon">🎫 <span>Reservas</span><em>Pronto</em></button>
+        <p class="nav-label space-top" data-i18n="navOther">OTROS</p>
+        <div class="lang-switch">
+          <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false"><span class="lang-flag" id="langFlag">🇪🇸</span><span class="lang-code" id="langCode">ES</span><i class="lang-caret">▾</i></button>
+          <div class="lang-menu" id="langMenu" role="menu">
+            <button data-lang="es" role="menuitem"><span class="lang-flag">🇪🇸</span>Español</button>
+            <button data-lang="en" role="menuitem"><span class="lang-flag">🇬🇧</span>English</button>
+            <button data-lang="fr" role="menuitem"><span class="lang-flag">🇫🇷</span>Français</button>
+            <button data-lang="de" role="menuitem"><span class="lang-flag">🇩🇪</span>Deutsch</button>
+            <button data-lang="pt" role="menuitem"><span class="lang-flag">🇵🇹</span>Português</button>
+            <button data-lang="it" role="menuitem"><span class="lang-flag">🇮🇹</span>Italiano</button>
+          </div>
+        </div>
       </nav>
 
       <div class="sidebar-bottom">
         <div class="tip-card">
           <span>💡</span>
-          <strong>Consejo viajero</strong>
-          <p>Dejad un pequeño margen para gastos inesperados.</p>
+          <strong data-i18n="tipTitle">Consejo viajero</strong>
+          <p data-i18n="tipText">Dejad un pequeño margen para gastos inesperados.</p>
         </div>
-        <button class="logout-btn" id="logoutBtn">↪ <span>Cerrar sesión</span></button>
+        <button class="logout-btn" id="logoutBtn">↪ <span data-i18n="logout">Cerrar sesión</span></button>
       </div>
     </aside>
 
     <main class="main">
       <header class="topbar">
         <div>
-          <span class="eyebrow">TU PRÓXIMA AVENTURA</span>
+          <span class="eyebrow" data-i18n="eyebrow">TU PRÓXIMA AVENTURA</span>
           <h1 id="tripHeading">Tu próximo viaje empieza aquí</h1>
         </div>
-        <button class="invite-btn" id="inviteBtn">＋ Invitar amigos</button>
+        <button class="invite-btn" id="inviteBtn">＋ <span data-i18n="invite">Invitar amigos</span></button>
       </header>
 
       <section id="resumen" class="page-section active-section">
         <div class="empty-trip-state" id="emptyTripState">
-          <div class="empty-orbit"><span>✦</span><strong>✈</strong><i></i></div>
-          <span class="section-kicker">TU ESPACIO DE VIAJES</span>
-          <h2>Tu próxima aventura<br>empieza aquí</h2>
-          <p>Aún no tienes viajes creados. Diseña el primero y empieza a organizarlo con tu grupo.</p>
-          <button class="primary-btn" id="emptyCreateTrip">＋ Crear mi primer viaje</button>
+          <h2 data-i18n="emptyTitle">Tu próxima aventura empieza aquí</h2>
+          <p data-i18n="emptyText">Aún no tienes viajes creados. Diseña el primero y empieza a organizarlo con tu grupo.</p>
         </div>
 
         <div class="hero-card trip-content">
           <div class="hero-content">
-            <span class="pill">✈️ 4 DÍAS DE AVENTURA</span>
+            <span class="pill" id="heroPill">✈️ <span data-i18n="pillDays">4 DÍAS DE AVENTURA</span></span>
             <h2 id="tripName">Sin viaje seleccionado</h2>
             <p id="tripDetails">Crea un viaje para empezar a organizarlo</p>
-            <div class="progress-wrap">
-              <div class="progress-info"><span>Preparación del viaje</span><strong>72%</strong></div>
-              <div class="progress"><div style="width:72%"></div></div>
-            </div>
           </div>
-          <div class="sun">☀️</div>
           <div class="hero-decoration">✦</div>
-          <div class="hero-scene" aria-hidden="true"><div class="scene-ring ring-one"></div><div class="scene-ring ring-two"></div><div class="scene-card"><span>✈</span><b>TRIPLY</b><small>YOUR NEXT ESCAPE</small></div><div class="scene-dot dot-one"></div><div class="scene-dot dot-two"></div></div>
+          <div class="hero-scene" aria-hidden="true">
+            <div class="scene-ring ring-one"></div>
+            <div class="scene-ring ring-two"></div>
+            <div class="scene-card"><span>✈</span><b>TRIPLY</b><small>YOUR NEXT ESCAPE</small></div>
+            <div class="scene-dot dot-one"></div>
+            <div class="scene-dot dot-two"></div>
+          </div>
         </div>
 
         <div class="stats-grid trip-content">
           <div class="stat-card">
             <div class="stat-icon purple">📅</div>
-            <div><span>Próximo plan</span><strong>Playa de Muro</strong><small>Mañana · 10:30</small></div>
+            <div>
+              <span data-i18n="statNextPlan">Próximo plan</span>
+              <strong class="stat-value" id="statNextPlan">—</strong>
+              <small id="statNextPlanSub" data-i18n="none">Nada previsto</small>
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-icon green">💰</div>
-            <div><span>Gasto por persona</span><strong>185,50 €</strong><small>de 250 € previstos</small></div>
+            <div>
+              <span data-i18n="statPerPerson">Gasto por persona</span>
+              <strong class="stat-value" id="statPerPerson">0,00 €</strong>
+              <small id="statPerPersonSub">/ 0 €</small>
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-icon orange">🗳️</div>
-            <div><span>Votaciones abiertas</span><strong>2 pendientes</strong><small>Tu voto cuenta</small></div>
+            <div>
+              <span data-i18n="statOpenVotes">Votaciones abiertas</span>
+              <strong class="stat-value" id="statOpenVotes">0</strong>
+              <small id="statOpenVotesSub" data-i18n="statOpenVotesNone">Sin votaciones</small>
+            </div>
           </div>
         </div>
 
         <div class="content-grid trip-content">
           <div class="panel itinerary-preview">
             <div class="panel-heading">
-              <div><span class="section-kicker">PLAN DEL VIAJE</span><h3>Próximos días</h3></div>
-              <button class="text-btn" data-go="itinerario">Ver todo →</button>
+              <div>
+                <span class="section-kicker" data-i18n="planKicker">PLAN DEL VIAJE</span>
+                <h3 data-i18n="upcomingDays">Próximos días</h3>
+              </div>
+              <button class="text-btn" data-go="itinerario"><span data-i18n="seeAll">Ver todo</span> →</button>
             </div>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="day-badge">12<br><small>OCT</small></div>
-                <div class="timeline-line"></div>
-                <div class="timeline-content"><span>16:00</span><strong>✈️ Llegada a Palma</strong><p>Recoger el coche y hacer check-in</p></div>
-              </div>
-              <div class="timeline-item">
-                <div class="day-badge">13<br><small>OCT</small></div>
-                <div class="timeline-line"></div>
-                <div class="timeline-content"><span>10:30</span><strong>🏖️ Playa de Muro</strong><p>Un día de playa y relax</p></div>
-              </div>
-              <div class="timeline-item">
-                <div class="day-badge">14<br><small>OCT</small></div>
-                <div class="timeline-line"></div>
-                <div class="timeline-content"><span>09:00</span><strong>🥾 Ruta por la Serra</strong><p>Excursión + picnic</p></div>
-              </div>
-            </div>
+            <div class="timeline" id="homeTimeline"></div>
+            <p class="empty-hint" id="homeTimelineEmpty" data-i18n="itinEmpty">Aún no hay actividades planificadas. Añade la primera desde Itinerario.</p>
           </div>
 
           <div class="panel people-panel">
             <div class="panel-heading">
-              <div><span class="section-kicker">EL EQUIPO</span><h3>Los viajeros</h3></div>
-              <span class="people-count">4/6</span>
+              <div>
+                <span class="section-kicker" data-i18n="teamKicker">EL EQUIPO</span>
+                <h3 data-i18n="travelersTitle">Los viajeros</h3>
+              </div>
+              <span class="people-count" id="peopleCount">0/0</span>
             </div>
-            <div class="people">
-              <div class="person"><div class="avatar avatar-pink">EL</div><div><strong>Eleazar</strong><small>Organizador</small></div><span class="online"></span></div>
-              <div class="person"><div class="avatar avatar-blue">JR</div><div><strong>Jorge</strong><small>Viajero</small></div><span class="online"></span></div>
-              <div class="person"><div class="avatar avatar-yellow">AM</div><div><strong>Ana</strong><small>Viajera</small></div><span class="online"></span></div>
-              <div class="person"><div class="avatar avatar-purple">DS</div><div><strong>Dani</strong><small>Viajero</small></div><span></span></div>
-            </div>
-            <button class="full-btn" id="inviteBtn2">＋ Añadir viajero</button>
+            <div class="people" id="peopleList"></div>
+            <p class="empty-hint" id="peopleEmpty" data-i18n="peopleEmpty">Todavía no se ha unido nadie. Invita a tu grupo.</p>
+            <button class="full-btn" id="inviteBtn2">＋ <span data-i18n="addTraveler">Añadir viajero</span></button>
           </div>
-        </div>
-
-        <div class="panel vote-highlight trip-content">
-          <div class="vote-emoji">🍽️</div>
-          <div class="vote-info"><span class="section-kicker">DECIDID ENTRE TODOS</span><h3>¿Dónde cenamos el viernes?</h3><p>La votación termina en 18 horas.</p></div>
-          <div class="vote-options"><div><span>🍕 La Trattoria</span><strong>3 votos</strong></div><div><span>🍣 Sushiko</span><strong>1 voto</strong></div></div>
-          <button class="primary-btn" data-go="votaciones">Votar</button>
         </div>
       </section>
 
       <section id="itinerario" class="page-section">
-        <div class="section-header"><div><span class="eyebrow">ORGANIZACIÓN</span><h2>Itinerario 📅</h2><p>Todo lo que tenéis planeado, día por día.</p></div><button class="primary-btn" id="addActivity">＋ Añadir actividad</button></div>
-        <div class="day-tabs"><button class="day-tab active">12 OCT</button><button class="day-tab">13 OCT</button><button class="day-tab">14 OCT</button><button class="day-tab">15 OCT</button></div>
-        <div class="schedule">
-          <div class="schedule-card"><time>16:00</time><div class="schedule-icon">✈️</div><div><span class="tag purple-tag">TRANSPORTE</span><h3>Llegada a Palma</h3><p>Recoger el coche en el aeropuerto.</p></div><button class="dots">•••</button></div>
-          <div class="schedule-card"><time>18:30</time><div class="schedule-icon">🏨</div><div><span class="tag green-tag">ALOJAMIENTO</span><h3>Check-in en el apartamento</h3><p>Dejar las maletas y descansar.</p></div><button class="dots">•••</button></div>
-          <div class="schedule-card"><time>21:00</time><div class="schedule-icon">🍝</div><div><span class="tag orange-tag">COMIDA</span><h3>Cena en el centro</h3><p>Reserva pendiente de confirmar.</p></div><button class="dots">•••</button></div>
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="orgEyebrow">ORGANIZACIÓN</span>
+            <h2><span data-i18n="navItin">Itinerario</span> 📅</h2>
+            <p data-i18n="itinSub">Todo lo que tenéis planeado, día por día.</p>
+          </div>
+          <button class="primary-btn" id="addActivity">＋ <span data-i18n="addActivityBtn">Añadir actividad</span></button>
         </div>
-        <div class="coming-box"><span>🗺️</span><div><strong>Mapas y rutas — próximamente</strong><p>Podrás ver todas las actividades directamente sobre un mapa.</p></div></div>
+        <div class="day-tabs" id="dayTabs"></div>
+        <div class="schedule" id="scheduleList"></div>
+        <div class="empty-hint panel" id="scheduleEmpty" data-i18n="scheduleEmpty">Todavía no hay actividades para este día.</div>
       </section>
 
       <section id="gastos" class="page-section">
-        <div class="section-header"><div><span class="eyebrow">DINERO</span><h2>Gastos 💸</h2><p>Controlad el presupuesto sin discusiones.</p></div><button class="primary-btn" id="addExpense">＋ Añadir gasto</button></div>
-        <div class="money-cards"><div class="money-card"><span>Presupuesto total</span><strong>1.000 €</strong><div class="money-bar"><i style="width:74%"></i></div><small>740 € gastados</small></div><div class="money-card"><span>Por persona</span><strong>185,50 €</strong><small>4 viajeros</small></div><div class="money-card"><span>Queda</span><strong>260 €</strong><small>26% del presupuesto</small></div></div>
-        <div class="panel expense-panel"><div class="panel-heading"><div><span class="section-kicker">MOVIMIENTOS</span><h3>Últimos gastos</h3></div></div>
-          <div class="expense-row"><span class="expense-icon">🏨</span><div><strong>Apartamento</strong><small>Eleazar · 12 oct</small></div><b>420,00 €</b></div>
-          <div class="expense-row"><span class="expense-icon">🚗</span><div><strong>Coche de alquiler</strong><small>Jorge · 12 oct</small></div><b>180,00 €</b></div>
-          <div class="expense-row"><span class="expense-icon">🍕</span><div><strong>Cena</strong><small>Ana · 13 oct</small></div><b>68,00 €</b></div>
-          <div class="expense-row"><span class="expense-icon">⛽</span><div><strong>Gasolina</strong><small>Dani · 14 oct</small></div><b>72,00 €</b></div>
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="moneyEyebrow">DINERO</span>
+            <h2><span data-i18n="navExp">Gastos</span> 💸</h2>
+            <p data-i18n="expSub">Controlad el presupuesto sin discusiones.</p>
+          </div>
+          <button class="primary-btn" id="addExpense">＋ <span data-i18n="addExpenseBtn">Añadir gasto</span></button>
         </div>
-        <div class="settlement"><span>💸</span><div><strong>Reparto automático — próximamente</strong><p>El backend calculará quién tiene que pagar a quién para equilibrar los gastos.</p></div></div>
+        <div class="money-cards">
+          <div class="money-card">
+            <span data-i18n="budgetTotal">Presupuesto total</span>
+            <strong id="budgetTotal">0 €</strong>
+            <small id="budgetSpent">0 €</small>
+          </div>
+          <div class="money-card">
+            <span data-i18n="perPerson">Por persona</span>
+            <strong id="perPerson">0 €</strong>
+            <small id="perPersonSub">0</small>
+          </div>
+          <div class="money-card">
+            <span data-i18n="remaining">Queda</span>
+            <strong id="remaining">0 €</strong>
+            <small id="remainingPct">0%</small>
+          </div>
+        </div>
+        <div class="panel expense-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="section-kicker" data-i18n="movementsKicker">MOVIMIENTOS</span>
+              <h3 data-i18n="latestExpenses">Últimos gastos</h3>
+            </div>
+          </div>
+          <div id="expenseList"></div>
+          <p class="empty-hint" id="expenseEmpty" data-i18n="expenseEmpty">Todavía no hay gastos registrados.</p>
+        </div>
       </section>
 
       <section id="votaciones" class="page-section">
-        <div class="section-header"><div><span class="eyebrow">DECISIONES</span><h2>Votaciones 🗳️</h2><p>Porque ponerse de acuerdo también forma parte del viaje.</p></div><button class="primary-btn" id="newVote">＋ Nueva votación</button></div>
-        <div class="vote-grid">
-          <div class="vote-card"><span class="vote-status open">ABIERTA</span><h3>¿Dónde cenamos el viernes?</h3><p>Elige tu restaurante favorito.</p><div class="poll-option"><span>🍕 La Trattoria</span><b>3</b></div><div class="poll-option"><span>🍣 Sushiko</span><b>1</b></div><div class="poll-option"><span>🍔 Burger Lab</span><b>0</b></div><button class="secondary-btn vote-now">Votar ahora</button></div>
-          <div class="vote-card"><span class="vote-status open">ABIERTA</span><h3>¿A qué hora salimos?</h3><p>Para la excursión de Serra.</p><div class="poll-option"><span>🌅 08:00</span><b>1</b></div><div class="poll-option"><span>☀️ 09:00</span><b>3</b></div><button class="secondary-btn vote-now">Votar ahora</button></div>
-          <div class="vote-card locked"><span class="vote-status closed">CERRADA</span><h3>¿Hotel o apartamento?</h3><p>Decisión tomada el 1 de septiembre.</p><div class="winner">🏆 Apartamento <strong>4 votos</strong></div></div>
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="decEyebrow">DECISIONES</span>
+            <h2><span data-i18n="navVotes">Votaciones</span> 🗳️</h2>
+            <p data-i18n="votesSub">Porque ponerse de acuerdo también forma parte del viaje.</p>
+          </div>
+          <button class="primary-btn" id="newVote">＋ <span data-i18n="newVoteBtn">Nueva votación</span></button>
+        </div>
+        <div class="vote-grid" id="voteGrid"></div>
+        <div class="empty-hint panel" id="votesEmpty" data-i18n="votesEmpty">No hay votaciones todavía. Crea la primera y decid en grupo.</div>
+      </section>
+
+      <section id="mapa" class="page-section">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="geoEyebrow">GEOGRAFÍA</span>
+            <h2><span data-i18n="navMap">Mapa</span> 📍</h2>
+            <p data-i18n="mapSub">Vuestra ruta, de un vistazo.</p>
+          </div>
+        </div>
+        <div class="panel map-panel">
+          <div class="map-canvas" id="mapCanvas" role="img" aria-label="Mapa del viaje">
+            <svg viewBox="0 0 800 430" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path class="map-land" d="M-40,290 C80,240 140,300 250,262 C360,224 420,272 520,238 C640,198 700,246 850,208 L850,480 L-40,480 Z"/>
+              <path class="map-land2" d="M-40,352 C120,318 260,368 420,330 C560,298 690,340 850,306 L850,480 L-40,480 Z"/>
+              <ellipse class="map-lake" cx="618" cy="152" rx="66" ry="24"/>
+              <path class="map-road" d="M-10,392 C140,368 190,300 330,296 C470,292 500,220 660,196"/>
+              <path class="map-route" d="M120,330 C230,300 260,240 380,232 C500,224 540,170 650,150"/>
+            </svg>
+            <button class="map-pin pin-start" style="left:15%;top:76%" data-pop="0"><span class="pin-dot">A</span><span class="pin-pop"></span></button>
+            <button class="map-pin" style="left:47%;top:53%" data-pop="1"><span class="pin-dot">B</span><span class="pin-pop"></span></button>
+            <button class="map-pin" style="left:81%;top:34%" data-pop="2"><span class="pin-dot">C</span><span class="pin-pop"></span></button>
+            <span class="map-compass">🧭</span>
+            <span class="map-scale" data-i18n="mapScale">Ruta aproximada</span>
+          </div>
+          <div class="map-legend">
+            <button class="spot-card" data-pop="0"><span class="spot-icon">🚗</span><div class="spot-info"><strong id="spotName0">—</strong><small id="spotNote0"></small></div><span class="spot-tag" id="spotTag0">A</span></button>
+            <button class="spot-card" data-pop="1"><span class="spot-icon">✈️</span><div class="spot-info"><strong id="spotName1">—</strong><small id="spotNote1"></small></div><span class="spot-tag" id="spotTag1">B</span></button>
+            <button class="spot-card" data-pop="2"><span class="spot-icon">🏖️</span><div class="spot-info"><strong id="spotName2">—</strong><small id="spotNote2"></small></div><span class="spot-tag" id="spotTag2">C</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section id="reservas" class="page-section">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="resEyebrow">TU TRIPLY</span>
+            <h2><span data-i18n="navBook">Reservas</span> 🎫</h2>
+            <p data-i18n="bookSub">Todo lo confirmado para vuestro viaje, en un solo lugar.</p>
+          </div>
+        </div>
+        <div class="booking-grid">
+          <article class="booking-card" tabindex="0">
+            <div class="booking-top"><span class="booking-icon">🏨</span><span class="booking-status confirmed" data-i18n="statusConfirmed">CONFIRMADA</span></div>
+            <h3 id="bkStayName">—</h3>
+            <p class="booking-ref">TRIPLY-STAY-4471</p>
+            <div class="booking-row"><span data-i18n="bkStayDates">Fechas</span><b id="bkStayDates">—</b></div>
+            <div class="booking-row"><span data-i18n="bkGuests">Huéspedes</span><b id="bkGuests">0</b></div>
+            <div class="booking-row"><span data-i18n="bkPrice">Precio</span><b>420,00 €</b></div>
+            <button class="secondary-btn booking-code" data-i18n="bkCode">Ver código de confirmación</button>
+          </article>
+          <article class="booking-card" tabindex="0">
+            <div class="booking-top"><span class="booking-icon">✈️</span><span class="booking-status confirmed" data-i18n="statusConfirmed">CONFIRMADA</span></div>
+            <h3 id="bkFlightName">—</h3>
+            <p class="booking-ref">TR-7742</p>
+            <div class="booking-row"><span data-i18n="bkFlightWhen">Salida</span><b id="bkFlightWhen">—</b></div>
+            <div class="booking-row"><span data-i18n="bkPax">Pasajeros</span><b id="bkPax">0</b></div>
+            <div class="booking-row"><span data-i18n="bkPrice">Precio</span><b>236,00 €</b></div>
+            <button class="secondary-btn booking-code" data-i18n="bkCode">Ver código de confirmación</button>
+          </article>
         </div>
       </section>
     </main>
   </div>
 
-  <div class="toast" id="toast"></div>
-  <div class="modal" id="modal"><div class="modal-box"><button class="modal-close" id="closeModal">×</button><div class="modal-icon" id="modalIcon">🚀</div><h2 id="modalTitle">Función de demo</h2><p id="modalText">Esta acción está preparada para conectarse con el backend.</p><form class="trip-form" id="tripForm"><label for="tripInputName">Nombre del viaje</label><input id="tripInputName" required maxlength="30" placeholder="Ej. Escapada a Lisboa"><label for="tripInputDates">Fechas</label><input id="tripInputDates" required maxlength="40" placeholder="Ej. 3 — 7 mayo 2027"><label for="tripInputTravelers">Número de viajeros</label><input id="tripInputTravelers" type="number" min="1" max="30" value="2" required><button class="primary-btn" type="submit">Crear viaje</button></form><button class="primary-btn" id="modalOk">¡Entendido!</button></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModal" aria-label="Cerrar">×</button>
+      <div class="modal-icon" id="modalIcon">🚀</div>
+      <h2 id="modalTitle">Función de demo</h2>
+      <p id="modalText">Esta acción está preparada para conectarse con el backend.</p>
+
+      <form class="trip-form" id="tripForm" hidden>
+        <label for="tripInputName" data-i18n="fTripName">Nombre del viaje</label>
+        <input id="tripInputName" required maxlength="30" placeholder="Ej. Escapada a Lisboa">
+        <label for="tripInputDates" data-i18n="fTripDates">Fechas</label>
+        <input id="tripInputDates" required maxlength="40" placeholder="Ej. 3 — 7 mayo 2027">
+        <label for="tripInputTravelers" data-i18n="fTripTravelers">Número de viajeros</label>
+        <input id="tripInputTravelers" type="number" min="1" max="30" value="2" required>
+        <button class="primary-btn" type="submit" data-i18n="createTripBtn">Crear viaje</button>
+      </form>
+
+      <form class="profile-form" id="profileForm" hidden>
+        <label for="editProfileName" data-i18n="fProfileName">Nombre de usuario</label>
+        <input id="editProfileName" type="text" required maxlength="25">
+        
+        <label data-i18n="fAvatarType">Icono o Estilo de Avatar</label>
+        <div class="avatar-picker" id="avatarPicker">
+          <button type="button" class="avatar-opt" data-avatar="initials">🔤 Init</button>
+          <button type="button" class="avatar-opt" data-avatar="🦊">🦊</button>
+          <button type="button" class="avatar-opt" data-avatar="✈️">✈️</button>
+          <button type="button" class="avatar-opt" data-avatar="🌴">🌴</button>
+          <button type="button" class="avatar-opt" data-avatar="🎒">🎒</button>
+        </div>
+        <button class="primary-btn" type="submit" data-i18n="saveProfileBtn">Guardar cambios</button>
+      </form>
+
+      <button class="primary-btn" id="modalOk" data-i18n="okBtn">¡Entendido!</button>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

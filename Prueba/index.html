@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triplan — Planifica tu viaje</title>
+  
+  <!-- Favicon con la imagen de alta nitidez -->
+  <link rel="icon" type="image/png" href="triplan.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a href="index.html" class="brand">
+        <img src="triplan.png" alt="Triplan Logo" class="brand-logo">
+      </a>
+
+      <div class="profile-area">
+        <button class="profile-mini" id="profileToggle" aria-haspopup="true" aria-expanded="false">
+          <div class="avatar avatar-pink" id="userAvatar">EL</div>
+          <div class="profile-info">
+            <strong id="userName">Eleazar</strong>
+            <small id="userRole" data-i18n="role">Organizador</small>
+          </div>
+          <i class="profile-caret">▾</i>
+        </button>
+        <div class="profile-submenu" id="profileSubmenu">
+          <button class="submenu-item" id="openEditProfile">
+            <i>✏️</i> <span data-i18n="editProfile">Editar perfil</span>
+          </button>
+          <a href="registro.html" class="submenu-item" style="text-decoration: none;">
+            <i>👤</i> <span data-i18n="newAccount">Crear cuenta nueva</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="trip-switcher">
+        <label for="tripSelector" data-i18n="myTrips">MIS VIAJES</label>
+        <select id="tripSelector" aria-label="Seleccionar viaje"></select>
+        <button class="new-trip-btn" id="newTripBtn">＋ <span data-i18n="newTrip">Nuevo viaje</span></button>
+      </div>
+
+      <nav>
+        <p class="nav-label" data-i18n="navMyTrip">MI VIAJE</p>
+        <button class="nav-item active" data-section="resumen"><i>🏠</i> <span
+            data-i18n="navHome">Resumen</span></button>
+        <button class="nav-item" data-section="itinerario"><i>📅</i> <span
+            data-i18n="navItin">Itinerario</span></button>
+        <button class="nav-item" data-section="gastos"><i>💸</i> <span data-i18n="navExp">Gastos</span></button>
+        <button class="nav-item" data-section="votaciones"><i>🗳️</i> <span
+            data-i18n="navVotes">Votaciones</span></button>
+        <button class="nav-item" data-section="mapa"><i>📍</i> <span data-i18n="navMap">Mapa</span></button>
+        <button class="nav-item" data-section="reservas"><i>🎫</i> <span data-i18n="navBook">Reservas</span></button>
+
+        <p class="nav-label space-top" data-i18n="navOther">OTROS</p>
+        <div class="lang-switch">
+          <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false"><span class="lang-flag"
+              id="langFlag">🇪🇸</span><span class="lang-code" id="langCode">ES</span><i
+              class="lang-caret">▾</i></button>
+          <div class="lang-menu" id="langMenu" role="menu">
+            <button data-lang="es" role="menuitem"><span class="lang-flag">🇪🇸</span>Español</button>
+            <button data-lang="en" role="menuitem"><span class="lang-flag">🇬🇧</span>English</button>
+            <button data-lang="fr" role="menuitem"><span class="lang-flag">🇫🇷</span>Français</button>
+            <button data-lang="de" role="menuitem"><span class="lang-flag">🇩🇪</span>Deutsch</button>
+            <button data-lang="pt" role="menuitem"><span class="lang-flag">🇵🇹</span>Português</button>
+            <button data-lang="it" role="menuitem"><span class="lang-flag">🇮🇹</span>Italiano</button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <span>💡</span>
+          <strong data-i18n="tipTitle">Consejo viajero</strong>
+          <p data-i18n="tipText">Dejad un pequeño margen para gastos inesperados.</p>
+        </div>
+        <button class="logout-btn" id="logoutBtn">↪ <span data-i18n="logout">Cerrar sesión</span></button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow" data-i18n="eyebrow">TU PRÓXIMA AVENTURA</span>
+          <h1 id="tripHeading">Tu próximo viaje empieza aquí</h1>
+        </div>
+        <button class="invite-btn" id="inviteBtn">＋ <span data-i18n="invite">Invitar amigos</span></button>
+      </header>
+
+      <section id="resumen" class="page-section active-section">
+        <div class="empty-trip-state" id="emptyTripState">
+          <h2 data-i18n="emptyTitle">Tu próxima aventura empieza aquí</h2>
+          <p data-i18n="emptyText">Aún no tienes viajes creados. Diseña el primero y empieza a organizarlo con tu grupo.</p>
+          <button class="primary-btn" id="emptyCreateTrip" style="margin-top: 20px;">＋ Crear mi primer viaje</button>
+        </div>
+
+        <div class="hero-card trip-content">
+          <div class="hero-content">
+            <span class="pill" id="heroPill">✈️ <span data-i18n="pillDays">4 DÍAS DE AVENTURA</span></span>
+            <h2 id="tripName">Sin viaje seleccionado</h2>
+            <p id="tripDetails">Crea un viaje para empezar a organizarlo</p>
+          </div>
+          <div class="hero-decoration">✦</div>
+          <div class="hero-scene" aria-hidden="true">
+            <div class="scene-ring ring-one"></div>
+            <div class="scene-ring ring-two"></div>
+            <div class="scene-card"><span>✈</span><b>TRIPLAN</b><small>YOUR NEXT ESCAPE</small></div>
+            <div class="scene-dot dot-one"></div>
+            <div class="scene-dot dot-two"></div>
+          </div>
+        </div>
+
+        <div class="stats-grid trip-content">
+          <div class="stat-card">
+            <div class="stat-icon purple">📅</div>
+            <div>
+              <span data-i18n="statNextPlan">Próximo plan</span>
+              <strong class="stat-value" id="statNextPlan">—</strong>
+              <small id="statNextPlanSub" data-i18n="none">Nada previsto</small>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">💰</div>
+            <div>
+              <span data-i18n="statPerPerson">Gasto por persona</span>
+              <strong class="stat-value" id="statPerPerson">0,00 €</strong>
+              <small id="statPerPersonSub">/ 0 €</small>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange">🗳️</div>
+            <div>
+              <span data-i18n="statOpenVotes">Votaciones abiertas</span>
+              <strong class="stat-value" id="statOpenVotes">0</strong>
+              <small id="statOpenVotesSub" data-i18n="statOpenVotesNone">Sin votaciones</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-grid trip-content">
+          <div class="panel itinerary-preview">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker" data-i18n="planKicker">PLAN DEL VIAJE</span>
+                <h3 data-i18n="upcomingDays">Próximos días</h3>
+              </div>
+              <button class="text-btn" data-go="itinerario"><span data-i18n="seeAll">Ver todo</span> →</button>
+            </div>
+            <div class="timeline" id="homeTimeline"></div>
+            <p class="empty-hint" id="homeTimelineEmpty" data-i18n="itinEmpty">Aún no hay actividades planificadas. Añade la primera desde Itinerario.</p>
+          </div>
+
+          <div class="panel people-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker" data-i18n="teamKicker">EL EQUIPO</span>
+                <h3 data-i18n="travelersTitle">Los viajeros</h3>
+              </div>
+              <span class="people-count" id="peopleCount">0/0</span>
+            </div>
+            <div class="people" id="peopleList"></div>
+            <p class="empty-hint" id="peopleEmpty" data-i18n="peopleEmpty">Todavía no se ha unido nadie. Invita a tu grupo.</p>
+            <button class="full-btn" id="inviteBtn2">＋ <span data-i18n="addTraveler">Añadir viajero</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section id="itinerario" class="page-section">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="orgEyebrow">ORGANIZACIÓN</span>
+            <h2><span data-i18n="navItin">Itinerario</span> 📅</h2>
+            <p data-i18n="itinSub">Todo lo que tenéis planeado, día por día.</p>
+          </div>
+          <button class="primary-btn" id="addActivity">＋ <span data-i18n="addActivityBtn">Añadir actividad</span></button>
+        </div>
+        <div class="day-tabs" id="dayTabs"></div>
+        <div class="schedule" id="scheduleList"></div>
+        <div class="empty-hint panel" id="scheduleEmpty" data-i18n="scheduleEmpty">Todavía no hay actividades para este día.</div>
+      </section>
+
+      <section id="gastos" class="page-section">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="moneyEyebrow">DINERO</span>
+            <h2><span data-i18n="navExp">Gastos</span> 💸</h2>
+            <p data-i18n="expSub">Controlad el presupuesto sin discusiones.</p>
+          </div>
+          <button class="primary-btn" id="addExpense">＋ <span data-i18n="addExpenseBtn">Añadir gasto</span></button>
+        </div>
+        <div class="money-cards">
+          <div class="money-card">
+            <span data-i18n="budgetTotal">Presupuesto total</span>
+            <strong id="budgetTotal">0 €</strong>
+            <small id="budgetSpent">0 €</small>
+          </div>
+          <div class="money-card">
+            <span data-i18n="perPerson">Por persona</span>
+            <strong id="perPerson">0 €</strong>
+            <small id="perPersonSub">0</small>
+          </div>
+          <div class="money-card">
+            <span data-i18n="remaining">Queda</span>
+            <strong id="remaining">0 €</strong>
+            <small id="remainingPct">0%</small>
+          </div>
+        </div>
+        <div class="panel expense-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="section-kicker" data-i18n="movementsKicker">MOVIMIENTOS</span>
+              <h3 data-i18n="latestExpenses">Últimos gastos</h3>
+            </div>
+          </div>
+          <div id="expenseList"></div>
+          <p class="empty-hint" id="expenseEmpty" data-i18n="expenseEmpty">Todavía no hay gastos registrados.</p>
+        </div>
+      </section>
+
+      <section id="votaciones" class="page-section">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="decEyebrow">DECISIONES</span>
+            <h2><span data-i18n="navVotes">Votaciones</span> 🗳️</h2>
+            <p data-i18n="votesSub">Porque ponerse de acuerdo también forma parte del viaje.</p>
+          </div>
+          <button class="primary-btn" id="newVote">＋ <span data-i18n="newVoteBtn">Nueva votación</span></button>
+        </div>
+        <div class="vote-grid" id="voteGrid"></div>
+        <div class="empty-hint panel" id="votesEmpty" data-i18n="votesEmpty">No hay votaciones todavía. Crea la primera y decid en grupo.</div>
+      </section>
+
+      <section id="mapa" class="page-section">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="geoEyebrow">GEOGRAFÍA</span>
+            <h2><span data-i18n="navMap">Mapa</span> 📍</h2>
+            <p data-i18n="mapSub">Vuestra ruta, de un vistazo.</p>
+          </div>
+        </div>
+        <div class="panel map-panel">
+          <div id="realMap" style="width: 100%; height: 420px; border-radius: 16px;"></div>
+        </div>
+      </section>
+
+      <section id="reservas" class="page-section">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" data-i18n="resEyebrow">TU TRIPLAN</span>
+            <h2><span data-i18n="navBook">Reservas</span> 🎫</h2>
+            <p data-i18n="bookSub">Todo lo confirmado para vuestro viaje, en un solo lugar.</p>
+          </div>
+        </div>
+        <div class="booking-grid">
+          <article class="booking-card" tabindex="0">
+            <div class="booking-top"><span class="booking-icon">🏨</span><span class="booking-status confirmed" data-i18n="statusConfirmed">CONFIRMADA</span></div>
+            <h3 id="bkStayName">—</h3>
+            <p class="booking-ref">TRIPLAN-STAY-4471</p>
+            <div class="booking-row"><span data-i18n="bkStayDates">Fechas</span><b id="bkStayDates">—</b></div>
+            <div class="booking-row"><span data-i18n="bkGuests">Huéspedes</span><b id="bkGuests">0</b></div>
+            <div class="booking-row"><span data-i18n="bkPrice">Precio</span><b>420,00 €</b></div>
+            <button class="secondary-btn booking-code" data-i18n="bkCode">Ver código de confirmación</button>
+          </article>
+          <article class="booking-card" tabindex="0">
+            <div class="booking-top"><span class="booking-icon">✈️</span><span class="booking-status confirmed" data-i18n="statusConfirmed">CONFIRMADA</span></div>
+            <h3 id="bkFlightName">—</h3>
+            <p class="booking-ref">TR-7742</p>
+            <div class="booking-row"><span data-i18n="bkFlightWhen">Salida</span><b id="bkFlightWhen">—</b></div>
+            <div class="booking-row"><span data-i18n="bkPax">Pasajeros</span><b id="bkPax">0</b></div>
+            <div class="booking-row"><span data-i18n="bkPrice">Precio</span><b>236,00 €</b></div>
+            <button class="secondary-btn booking-code" data-i18n="bkCode">Ver código de confirmación</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModal" aria-label="Cerrar">×</button>
+      <div class="modal-icon" id="modalIcon">🚀</div>
+      <h2 id="modalTitle">Función de demo</h2>
+      <p id="modalText">Esta acción está preparada para conectarse con el backend.</p>
+
+      <form class="trip-form" id="tripForm" hidden>
+        <label for="tripInputName" data-i18n="fTripName">Nombre del viaje</label>
+        <input id="tripInputName" required maxlength="30" placeholder="Ej. Escapada a Lisboa" data-i18n-placeholder="phTripName">
+        <label for="tripInputDates" data-i18n="fTripDates">Fechas</label>
+        <input id="tripInputDates" required maxlength="40" placeholder="Ej. 3 — 7 mayo 2027" data-i18n-placeholder="phTripDates">
+        <label for="tripInputTravelers" data-i18n="fTripTravelers">Número de viajeros</label>
+        <input id="tripInputTravelers" type="number" min="1" max="30" value="2" required>
+        <button class="primary-btn" type="submit" data-i18n="createTripBtn">Crear viaje</button>
+      </form>
+
+      <form class="profile-form" id="profileForm" hidden>
+        <label for="editProfileName" data-i18n="fProfileName">Nombre de usuario</label>
+        <input id="editProfileName" type="text" required maxlength="25">
+
+        <label data-i18n="fAvatarType">Icono o Estilo de Avatar</label>
+        <div class="avatar-picker" id="avatarPicker">
+          <button type="button" class="avatar-opt" data-avatar="initials">🔤 Init</button>
+          <button type="button" class="avatar-opt" data-avatar="🦊">🦊</button>
+          <button type="button" class="avatar-opt" data-avatar="✈️">✈️</button>
+          <button type="button" class="avatar-opt" data-avatar="🌴">🌴</button>
+          <button type="button" class="avatar-opt" data-avatar="🎒">🎒</button>
+        </div>
+        <button class="primary-btn" type="submit" data-i18n="saveProfileBtn">Guardar cambios</button>
+      </form>
+
+      <button class="primary-btn" id="modalOk" data-i18n="okBtn">¡Entendido!</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
