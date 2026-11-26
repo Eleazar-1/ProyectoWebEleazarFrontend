@@ -1,0 +1,28 @@
+<aside class="sidebar">
+  <a routerLink="/trips" class="brand">
+    <img src="triplan.png" alt="Triplan" class="brand-logo">
+  </a>
+
+  <div class="profile-area">
+    <div class="profile-mini">
+      <div class="avatar avatar-pink">{{ initials() }}</div>
+      <div>
+        <strong>{{ user()?.name }}</strong>
+        <small>{{ user()?.email }}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="tip-card">
+      <span>💡</span>
+      <strong>Consejo viajero</strong>
+      <p>Dejad un pequeño margen para gastos inesperados.</p>
+    </div>
+    <button class="logout-btn" type="button" (click)="logout()">↪ Cerrar sesión</button>
+  </div>
+</aside>
+
+<main class="main">
+  <router-outlet />
+</main>
