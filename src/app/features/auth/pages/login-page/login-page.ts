@@ -21,13 +21,13 @@ export class LoginPage {
 
   protected readonly form = this.fb.group({
     email: this.fb.control('', [Validators.required, Validators.email]),
-    password: this.fb.control('', [Validators.required, Validators.minLength(4)]),
+    password: this.fb.control('', [Validators.required]),
   });
 
   protected submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.error.set('Introduce un correo válido y una contraseña de al menos 4 caracteres.');
+      this.error.set('Introduce un correo válido y tu contraseña.');
       return;
     }
 

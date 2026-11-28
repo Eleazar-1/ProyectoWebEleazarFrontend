@@ -29,12 +29,21 @@
       <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
         <label for="name">Nombre completo</label>
         <input id="name" type="text" formControlName="name" placeholder="Tu nombre" autocomplete="name">
+        @if (form.controls.name.touched && form.controls.name.invalid) {
+          <small class="field-error">El nombre es obligatorio.</small>
+        }
 
         <label for="email">Correo electrónico</label>
         <input id="email" type="email" formControlName="email" placeholder="tu@email.com" autocomplete="email">
+        @if (form.controls.email.touched && form.controls.email.invalid) {
+          <small class="field-error">Introduce un correo electrónico válido.</small>
+        }
 
         <label for="password">Contraseña</label>
         <input id="password" type="password" formControlName="password" placeholder="Al menos 4 caracteres" autocomplete="new-password">
+        @if (form.controls.password.touched && form.controls.password.invalid) {
+          <small class="field-error">La contraseña debe tener al menos 4 caracteres.</small>
+        }
 
         <div class="login-options">
           <label class="remember">
@@ -42,8 +51,13 @@
             <span>Acepto los términos y condiciones</span>
           </label>
         </div>
+        @if (form.controls.terms.touched && form.controls.terms.invalid) {
+          <small class="field-error">Debes aceptar los términos y condiciones.</small>
+        }
 
-        <button class="primary-btn login-submit register-submit" type="submit">Registrarse en Triplan <span>→</span></button>
+        <button class="primary-btn login-submit register-submit" type="submit" [disabled]="loading()">
+          {{ loading() ? 'Creando cuenta…' : 'Registrarse en Triplan' }} <span>→</span>
+        </button>
         <p class="login-error" role="alert">{{ error() }}</p>
       </form>
 
@@ -54,6 +68,6 @@
       </p>
     </div>
 
-    <small class="register-note">Demo frontend: almacenamiento local y acceso directo.</small>
+    <small class="register-note">Tu cuenta se crea en el servidor de Triplan.</small>
   </section>
 </main>
